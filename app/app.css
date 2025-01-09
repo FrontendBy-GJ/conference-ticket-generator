@@ -4,9 +4,29 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply bg-slate-400 dark:bg-gray-950;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('/fonts/Inconsolata-VariableFont_wdth,wght.ttf') format('truetype'),
+    url('/fonts/static/Inconsolata-Bold.ttf') format('truetype'),
+    url('/fonts/static/Inconsolata-ExtraBold.ttf') format('truetype'),
+    url('/fonts/static/Inconsolata-Medium.ttf') format('truetype'),
+    url('/fonts/static/Inconsolata-Regular.ttf') format('truetype');
+  font-weight: 400 500 700 800;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Inconsolata', sans-serif;
+  font-weight: 400;
+}
+
+label {
+  font-size: 1.25rem;
 }
