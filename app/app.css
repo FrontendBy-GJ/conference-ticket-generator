@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --body-rails: 1.3rem;
+
+  /* COLORS */
+  --neutral: hsl(0, 0%, 100%);
+  --neutral-300: hsl(252, 6%, 83%);
+  --neutral-500: hsl(245, 15%, 58%);
+  --neutral-700: hsl(245, 19%, 35%);
+  --neutral-900: hsl(248, 70%, 10%);
+  --orange-500: hsl(7, 88%, 67%);
+  --orange-700: hsl(7, 71%, 60%);
+}
+
 html,
 body {
   @apply bg-slate-400 dark:bg-gray-950;
@@ -22,11 +35,199 @@ body {
   font-style: normal;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  :focus-visible {
+    transition: outline-offset 75ms ease-out;
+  }
+  :not(:active):focus-visible {
+    transition-duration: 0.25s;
+  }
+}
+
+:not(:active):focus-visible {
+  outline-offset: 0.4rem;
+  outline-color: var(--neutral-500);
+}
+
 body {
   font-family: 'Inconsolata', sans-serif;
   font-weight: 400;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  background-image: url('./assets/images/pattern-lines.svg'),
+    url('./assets/images/pattern-circle.svg'),
+    url('./assets/images/pattern-squiggly-line-bottom.svg'),
+    url('./assets/images/pattern-squiggly-line-top.svg'),
+    image-set(
+      url('./assets/images/background-mobile.png') 1x,
+      url('./assets/images/background-tablet.png') 2x,
+      url('./assets/images/background-desktop.png') 3x
+    );
+  background-size: cover, clamp(100px, 30%, 200px), clamp(300px, 50%, 800px),
+    clamp(100px, 30%, 500px), cover;
+  background-position: center, 70dvw 55dvh, 0 110%, right 10vh, center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-label {
-  font-size: 1.25rem;
+main {
+  padding-inline: var(--body-rails);
+  max-inline-size: 65rem;
+  margin-inline: auto;
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  #logo {
+    margin-block-start: 5vh;
+    margin-inline: auto;
+    width: min(270px, 600px);
+  }
+}
+
+#index-page h1 {
+  color: var(--neutral);
+}
+h1,
+p {
+  text-align: center;
+}
+
+h1 + p {
+  font-weight: 500;
+  text-wrap: pretty;
+  margin-block-start: 0.5rem;
+  color: var(--neutral-300);
+}
+
+h1 {
+  font-size: clamp(1rem, 7vw, 2.5rem);
+  font-weight: 800;
+  text-wrap: pretty;
+  margin-block-start: 5vh;
+
+  @media (width >= 60rem) {
+    margin-inline: 14rem;
+  }
+}
+
+form {
+  --radius: 10px;
+
+  margin-block-start: 2rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  @media (width >= 60rem) {
+    max-inline-size: 25rem;
+  }
+
+  label {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    width: 100%;
+
+    input {
+      font-size: 1rem;
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--neutral-500);
+      background-color: hsl(245, 19%, 35%, 40%);
+      color: var(--neutral);
+      padding-inline-start: 1.5rem;
+      padding-block: 0.8rem;
+      margin-block-start: 0.5rem;
+      transition: background-color 200ms ease;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--neutral-700);
+      }
+    }
+  }
+}
+
+.upload-wrapper {
+  input[type='file'] {
+    display: none;
+  }
+
+  margin-block-start: 0.5rem;
+  background-color: hsl(245, 19%, 35%, 30%);
+  padding-block: 1rem;
+  border: 1px dashed var(--neutral-500);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 200ms ease;
+
+  &:hover {
+    background-color: var(--neutral-700);
+  }
+}
+
+.upload-icon-wrapper {
+  div {
+    width: fit-content;
+    border-radius: var(--radius);
+    border: solid var(--neutral-500);
+    background: var(--neutral-700);
+    padding: 0.5rem;
+    margin-inline: auto;
+  }
+  p {
+    font-size: 1rem;
+    color: var(--neutral-300);
+    margin-block-start: 0.5rem;
+  }
+}
+
+.file-upload-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--neutral-300);
+  margin-block-start: 0.5rem;
+}
+
+form button {
+  width: 100%;
+  border-radius: var(--radius);
+  background-color: var(--orange-500);
+  color: var(--neutral-900);
+  font-weight: 700;
+  padding-block: 0.8rem;
+  transition: box-shadow 200ms ease, background-color 200ms ease;
+
+  &:hover {
+    background-color: var(--orange-700);
+    box-shadow: inset 0 -6px 2px var(--orange-500);
+  }
+}
+
+footer {
+  margin-inline: auto;
+  text-align: center;
+  padding-block: 2rem;
+  font-size: 0.8rem;
+
+  p:first-of-type {
+    a {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: text-decoration 200ms ease allow-discrete;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  p:last-of-type {
+    a {
+      color: var(--orange-500);
+    }
+  }
 }

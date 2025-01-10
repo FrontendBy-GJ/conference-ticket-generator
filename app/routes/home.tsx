@@ -1,3 +1,6 @@
+import infoIcon from '../assets/images/icon-info.svg';
+import uploadIcon from '../assets/images/icon-upload.svg';
+
 export default function Home() {
   return (
     <section id="index-page">
@@ -6,8 +9,42 @@ export default function Home() {
       <p>Secure your spot at next year's biggest coding conference.</p>
 
       <form>
-        Upload Avatar Drag and drop or click to upload Upload your photo (JPG or
-        PNG, max size: 500KB).
+        <div>
+          <label htmlFor="avatar">
+            Upload Avatar
+            <div className="upload-wrapper">
+              <input
+                type="file"
+                name="avatar"
+                id="avatar"
+                accept="image/png, image/jpg"
+              />
+              <div className="upload-icon-wrapper">
+                <div>
+                  <img
+                    aria-hidden="true"
+                    src={uploadIcon}
+                    alt="upload icon"
+                    width="30"
+                    height="30"
+                  />
+                </div>
+                <p>Drag and drop or click to upload</p>
+              </div>
+            </div>
+          </label>
+          <div className="file-upload-info">
+            <img
+              aria-hidden="true"
+              src={infoIcon}
+              alt="information icon"
+              width="16"
+              height="16"
+            />
+            <p>Upload your photo (JPG or PNG, max size: 500KB).</p>
+          </div>
+        </div>
+
         <label htmlFor="full-name">
           Full Name
           <input

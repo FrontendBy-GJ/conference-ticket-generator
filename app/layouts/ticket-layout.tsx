@@ -16,7 +16,13 @@ export default function TicketLayout() {
   return (
     <>
       <main>
-        <img src={logofull} alt="Coding Conf" width="209" height="30" />
+        <img
+          id="logo"
+          src={logofull}
+          alt="Coding Conf"
+          width="209"
+          height="30"
+        />
         <Outlet />
       </main>
       <footer>
