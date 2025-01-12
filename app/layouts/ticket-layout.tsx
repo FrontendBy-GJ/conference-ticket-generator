@@ -28,14 +28,17 @@ export default function TicketLayout() {
       <footer>
         <p>
           Challenge by{' '}
-          <a href="https://www.frontendmentor.io?ref=challenge">
+          <a tabIndex={0} href="https://www.frontendmentor.io?ref=challenge">
             Frontend Mentor
           </a>
           .
         </p>
         <p>
           Coded by{' '}
-          <a href="https://www.frontendmentor.io/profile/FrontendBy-GJ">
+          <a
+            tabIndex={0}
+            href="https://www.frontendmentor.io/profile/FrontendBy-GJ"
+          >
             FrontendBy-GJ
           </a>
           .
