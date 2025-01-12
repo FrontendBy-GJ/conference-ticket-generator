@@ -257,7 +257,7 @@ form button {
     .event-details,
     .user-details {
       display: flex;
-      gap: 0.5rem;
+      gap: 1rem;
     }
 
     .event-details {
@@ -323,9 +323,12 @@ form button {
       justify-self: end;
     }
 
-    @media (width >= 48rem) {
+    @media (width >= 30rem) {
       padding: 2rem;
-      gap: 0;
+    }
+
+    @media (width >= 35rem) {
+      gap: 2rem;
 
       .event-details,
       .user-details {
@@ -333,10 +336,20 @@ form button {
       }
 
       .event-details {
+        img {
+          margin-block-start: 0.5rem;
+        }
+      }
+    }
+
+    @media (width >= 48rem) {
+      gap: 0;
+
+      .event-details {
         align-self: start;
 
         img {
-          margin-block-start: 0.5rem;
+          margin-block-start: 0.7rem;
         }
       }
       .user-details {
