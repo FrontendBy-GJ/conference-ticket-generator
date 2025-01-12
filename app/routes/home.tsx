@@ -41,8 +41,37 @@ export default function Home() {
       setFileError('');
       const url = URL.createObjectURL(file);
       setAvatarPreview(url);
-      console.log({ file });
     }
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+
+    if (e.dataTransfer.items) {
+      const item = e.dataTransfer.items[0];
+      if (item.kind === 'file') {
+        const file = item.getAsFile();
+        if (validateFile(file as File)) {
+          const url = URL.createObjectURL(file as unknown as File);
+          setFormData((prev) => ({
+            ...prev,
+            avatar: file,
+          }));
+          setFileError('');
+          setAvatarPreview(url);
+        } else {
+          setAvatarPreview(null);
+        }
+      }
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +80,18 @@ export default function Home() {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let username = e.target.value;
+
+    if (username.startsWith('@')) {
+      username = username.substring(1);
+    }
+    setFormData({
+      ...formData,
+      githubUsername: username,
+    });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -77,7 +118,6 @@ export default function Home() {
         },
       });
     }
-    console.log({ formData });
   };
 
   useEffect(() => {
@@ -98,7 +138,13 @@ export default function Home() {
         <div>
           <label htmlFor="avatar">
             Upload Avatar
-            <div className="upload-wrapper">
+            <div
+              id="drop_zone"
+              className="upload-wrapper"
+              onDrop={handleDrop}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+            >
               <input
                 type="file"
                 name="avatar"
@@ -140,6 +186,7 @@ export default function Home() {
             name="fullName"
             id="fullName"
             required
+            value={formData.fullName}
             onChange={handleInputChange}
           />
         </label>
@@ -152,6 +199,7 @@ export default function Home() {
             name="email"
             id="email"
             required
+            value={formData.email}
             onChange={handleInputChange}
           />
         </label>
@@ -164,7 +212,8 @@ export default function Home() {
             name="githubUsername"
             id="githubUsername"
             required
-            onChange={handleInputChange}
+            value={formData.githubUsername}
+            onChange={handleUsernameChange}
           />
         </label>
         <button type="submit">Generate My Ticket</button>
