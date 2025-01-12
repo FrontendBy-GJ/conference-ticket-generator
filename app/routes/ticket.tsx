@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useLocation } from 'react-router';
-import ticket from '../assets/images/pattern-ticket.svg';
 import logo from '../assets/images/logo-mark.svg';
 
 export default function Ticket() {
@@ -32,7 +31,7 @@ export default function Ticket() {
 
       <article
         style={{
-          backgroundImage: `url(${ticket})`,
+          backgroundImage: 'url(/assets/images/pattern-ticket.svg)',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'contain',
           backgroundPosition: 'center center',
